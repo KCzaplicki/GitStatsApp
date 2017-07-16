@@ -22,7 +22,3 @@ C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.App.xaml.g.cs
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.Views.MainPage.xaml.g.cs
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.dll
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.pdb
-C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.dll.mdb
-C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\GitStatsApp.dll.mdb
-C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.dll.mdb
-C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\GitStatsApp.dll.mdb
