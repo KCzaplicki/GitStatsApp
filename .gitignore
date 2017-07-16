@@ -1,0 +1,9 @@
+# ignore default vs folders
+.vs
+
+# ignore bin and obj
+**/bin
+**/obj
+
+# ignore express server
+GitStatsApp.RestApi
