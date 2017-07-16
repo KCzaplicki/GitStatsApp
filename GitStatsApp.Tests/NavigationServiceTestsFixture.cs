@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace GitStatsApp.Tests
 {
@@ -25,12 +20,10 @@ namespace GitStatsApp.Tests
 
     public class StubMainPage : ContentPage
     {
-
     }
 
     public class StubDetailsPage : ContentPage
     {
-
     }
 
     public class StubParameterPage : ContentPage
