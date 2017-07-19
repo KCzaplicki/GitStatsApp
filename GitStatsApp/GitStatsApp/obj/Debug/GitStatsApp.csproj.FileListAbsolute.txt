@@ -21,5 +21,16 @@ C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.App.xaml.g.cs
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.Views.MainPage.xaml.g.cs
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.dll
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.pdb
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.csprojResolveAssemblyReference.cache
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\GitStatsApp.dll.config
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\Newtonsoft.Json.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\System.Net.Http.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\System.Net.Http.Extensions.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\System.Net.Http.Primitives.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\Newtonsoft.Json.xml
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\System.Net.Http.xml
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\System.Net.Http.Extensions.xml
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\System.Net.Http.Primitives.xml
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.csproj.App.config
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\obj\Debug\GitStatsApp.dll.mdb
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp\bin\Debug\GitStatsApp.dll.mdb

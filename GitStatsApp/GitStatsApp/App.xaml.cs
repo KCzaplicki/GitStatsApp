@@ -18,6 +18,8 @@ namespace GitStatsApp
             nav.Configure(typeof(MainPage));
 
             SimpleIoc.Default.Register<INavigationService>(() => nav);
+            SimpleIoc.Default.Register<IRepositoryService, RepositoryService>();
+            SimpleIoc.Default.Register<IContributorService, ContributorService>();
 
             var mainPage = new NavigationPage(new MainPage());
 

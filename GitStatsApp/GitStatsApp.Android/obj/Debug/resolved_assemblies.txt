@@ -47,5 +47,12 @@ C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\Syst
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.ServiceModel.Internals.dll
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Text.RegularExpressions.dll
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Diagnostics.Tools.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\Newtonsoft.Json.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Xml.XDocument.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Runtime.Serialization.Primitives.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Text.Encoding.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Text.Encoding.Extensions.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\Microsoft.CSharp.dll
+C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\Mono.CSharp.dll
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Collections.Concurrent.dll
 C:\git\GitStatsApp\GitStatsApp\GitStatsApp.Android\obj\Debug\android\assets\System.Runtime.InteropServices.dll
