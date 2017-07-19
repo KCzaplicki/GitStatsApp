@@ -4,7 +4,6 @@ using GitStatsApp.Enums;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using System;
 
 namespace GitStatsApp.Services
 {
