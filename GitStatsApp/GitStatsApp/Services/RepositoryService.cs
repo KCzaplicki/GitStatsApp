@@ -9,10 +9,16 @@ namespace GitStatsApp.Services
 {
     public class RepositoryService : IRepositoryService
     {
+        private HttpClient _httpClient;
+
+        public RepositoryService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
         public async Task<IList<RepositoryDto>> GetRepositories()
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(RestApiUrls.GetRepositoriesUrl);
+            var response = await _httpClient.GetAsync(RestApiUrls.GetRepositoriesUrl);
 
             if (response.IsSuccessStatusCode)
             {
@@ -25,8 +31,7 @@ namespace GitStatsApp.Services
 
         public async Task<IList<ContributorDto>> GetRepositoryContributors(string repositoryId)
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(string.Format(RestApiUrls.GetRepositoryContributorsUrl, repositoryId));
+            var response = await _httpClient.GetAsync(string.Format(RestApiUrls.GetRepositoryContributorsUrl, repositoryId));
 
             if (response.IsSuccessStatusCode)
             {

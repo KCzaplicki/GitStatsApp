@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Views;
 using GitStatsApp.Services;
 using GitStatsApp.ViewModels;
 using GitStatsApp.Views;
+using System.Net.Http;
 using Xamarin.Forms;
 
 namespace GitStatsApp
@@ -18,6 +19,7 @@ namespace GitStatsApp
             nav.Configure(typeof(MainPage));
 
             SimpleIoc.Default.Register<INavigationService>(() => nav);
+            SimpleIoc.Default.Register<HttpClient, HttpClient>();
             SimpleIoc.Default.Register<IRepositoryService, RepositoryService>();
             SimpleIoc.Default.Register<IContributorService, ContributorService>();
 
