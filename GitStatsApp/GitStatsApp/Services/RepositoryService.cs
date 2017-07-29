@@ -23,7 +23,7 @@ namespace GitStatsApp.Services
             return null;
         }
 
-        public async Task<IList<ContributorDto>> GetRepositoryContributors(int repositoryId)
+        public async Task<IList<ContributorDto>> GetRepositoryContributors(string repositoryId)
         {
             var client = new HttpClient();
             var response = await client.GetAsync(string.Format(RestApiUrls.GetRepositoryContributorsUrl, repositoryId));

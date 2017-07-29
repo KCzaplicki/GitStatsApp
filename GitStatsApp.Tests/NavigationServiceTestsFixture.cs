@@ -2,12 +2,12 @@
 
 namespace GitStatsApp.Tests
 {
-    public class NavigationServiceTestsFixture : ContentPage
+    public class NavigationServiceTestsFixture
     {
-        public StubMainPage MainPage { get; set; }
-        public StubDetailsPage DetailsPage { get; set; }
-        public StubParameterPage ParameterPage { get; set; }
-        public string ParameterPageParameter { get; set; }
+        public StubMainPage MainPage { get; }
+        public StubDetailsPage DetailsPage { get; }
+        public StubParameterPage ParameterPage { get; }
+        public string ParameterPageParameter { get; }
 
         public NavigationServiceTestsFixture()
         {

@@ -7,6 +7,6 @@ namespace GitStatsApp.Services
     public interface IRepositoryService
     {
         Task<IList<RepositoryDto>> GetRepositories();
-        Task<IList<ContributorDto>> GetRepositoryContributors(int repositoryId);
+        Task<IList<ContributorDto>> GetRepositoryContributors(string repositoryId);
     }
 }

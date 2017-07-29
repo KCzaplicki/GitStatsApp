@@ -35,3 +35,6 @@ C:\git\GitStatsApp\GitStatsApp.Tests\obj\Debug\GitStatsApp.Tests.dll
 C:\git\GitStatsApp\GitStatsApp.Tests\obj\Debug\GitStatsApp.Tests.pdb
 C:\git\GitStatsApp\GitStatsApp.Tests\bin\Debug\Xamarin.Forms.Core.UnitTests.dll
 C:\git\GitStatsApp\GitStatsApp.Tests\bin\Debug\Xamarin.Forms.Xaml.UnitTests.dll
+C:\git\GitStatsApp\GitStatsApp.Tests\bin\Debug\Newtonsoft.Json.dll
+C:\git\GitStatsApp\GitStatsApp.Tests\bin\Debug\GitStatsApp.dll.config
+C:\git\GitStatsApp\GitStatsApp.Tests\bin\Debug\Newtonsoft.Json.xml

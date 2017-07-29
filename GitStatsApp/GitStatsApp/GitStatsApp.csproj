@@ -43,6 +43,7 @@
     <Compile Include="Dtos\RepositoryDto.cs" />
     <Compile Include="Enums\Pages.cs" />
     <Compile Include="Enums\RestApiUrls.cs" />
+    <Compile Include="Helpers\DateTimeExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ContributorService.cs" />
     <Compile Include="Services\IContributorService.cs" />
