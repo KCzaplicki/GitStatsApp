@@ -38,7 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dtos\ContibutorStatsDto.cs" />
+    <Compile Include="Dtos\ContributorStatsDto.cs" />
     <Compile Include="Dtos\ContributorDto.cs" />
     <Compile Include="Dtos\RepositoryDto.cs" />
     <Compile Include="Enums\Pages.cs" />

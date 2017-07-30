@@ -85,6 +85,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContributorServiceTests.cs" />
+    <Compile Include="ContributorServiceTestsFixture.cs" />
     <Compile Include="DateTimeExtensionTests.cs" />
     <Compile Include="DateTimeExtensionTestsFixture.cs" />
     <Compile Include="NavigationServiceTests.cs" />

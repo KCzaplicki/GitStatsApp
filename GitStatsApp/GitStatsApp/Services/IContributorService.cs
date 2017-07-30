@@ -6,6 +6,6 @@ namespace GitStatsApp.Services
 {
     public interface IContributorService
     {
-        Task<ContibutorStatsDto> GetContributorStats(string contributorId, DateTime? from = null, DateTime? to = null);
+        Task<ContributorStatsDto> GetContributorStats(string contributorId, DateTime? from = null, DateTime? to = null);
     }
 }

@@ -10,19 +10,30 @@ namespace GitStatsApp.Services
 {
     public class ContributorService : IContributorService
     {
-        public async Task<ContibutorStatsDto> GetContributorStats(string contributorId, DateTime? from = null, DateTime? to = null)
-        {
-            var client = new HttpClient();
+        private HttpClient _httpClient;
 
-            var toValue = from.HasValue && !to.HasValue ? DateTime.Now : to.Value;
-            var response = await client.GetAsync(from.HasValue ?
+        public ContributorService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<ContributorStatsDto> GetContributorStats(string contributorId, DateTime? from = null, DateTime? to = null)
+        {
+            DateTime toValue = DateTime.Now;
+
+            if (from.HasValue && to.HasValue)
+            {
+                toValue = to.Value;
+            }
+
+            var response = await _httpClient.GetAsync(from.HasValue ?
                 string.Format(RestApiUrls.GetContributorStatsWithRangeUrl, contributorId, from.Value.ToUnixTimestamp(), toValue.ToUnixTimestamp()) :
                 string.Format(RestApiUrls.GetContributorStatsUrl, contributorId));
 
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<ContibutorStatsDto>(content);
+                return JsonConvert.DeserializeObject<ContributorStatsDto>(content);
             }
 
             return null;

@@ -1,6 +1,6 @@
 ﻿namespace GitStatsApp.Dtos
 {
-    public class ContibutorStatsDto
+    public class ContributorStatsDto
     {
         public string Id { get; set; }
         public string Name { get; set; }
