@@ -9,7 +9,7 @@ namespace GitStatsApp.Tests
     [TestClass]
     public class ContributorServiceTests
     {
-        private ContributorService _contributorService;
+        private IContributorService _contributorService;
         private ContributorServiceTestsFixture _fixture;
 
         [TestInitialize]

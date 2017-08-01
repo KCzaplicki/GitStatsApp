@@ -4,4 +4,35 @@
              xmlns:local="clr-namespace:GitStatsApp"
              x:Class="GitStatsApp.Views.MainPage"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="repositoryUrlLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="#969FAA"/>
+                <Setter Property="LineBreakMode" Value="NoWrap"/>
+            </Style>
+            <Style x:Key="repositoriesContentViewStyle" TargetType="ContentView">
+                <Setter Property="Margin" Value="12, 8"></Setter>
+                <Setter Property="HeightRequest" Value="42"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Repositories}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <ContentView Style="{StaticResource repositoriesContentViewStyle}">
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Url}" Style="{StaticResource repositoryUrlLabelStyle}" />
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
 </ContentPage>
