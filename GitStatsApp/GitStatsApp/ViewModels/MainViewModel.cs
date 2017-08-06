@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using GitStatsApp.Consts;
 using GitStatsApp.Dtos;
 using GitStatsApp.Enums;
 using GitStatsApp.Services;
@@ -12,7 +13,7 @@ namespace GitStatsApp.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public string Title { get; } = "GitStatsApp";
+        public string Title { get; } = AppConsts.AppName;
 
         public ObservableCollection<RepositoryDto> Repositories { get; set; }
 

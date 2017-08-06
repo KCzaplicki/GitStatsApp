@@ -2,5 +2,42 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GitStatsApp"
-             x:Class="GitStatsApp.Views.ContributorPage">
+             x:Class="GitStatsApp.Views.ContributorPage"
+             Title="{Binding Title}">
+    <StackLayout>
+        <StackLayout>
+            <StackLayout>
+                <Label Text="{Binding Repository.Name}"/>
+                <Label Text="{Binding Repository.Url}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" >
+                <Image Source="{Binding ContributorIcon}" WidthRequest="24" HeightRequest="24"/>
+                <Label Text="{Binding Contributor.Name}" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" >
+                <Image Source="{Binding DateIcon}" WidthRequest="24" HeightRequest="24"/>
+                <Label Text="{Binding ContributorStatsDateRange}" VerticalOptions="Center"/>
+            </StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Merges"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding ContributorStats.Merges}"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="Commits"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ContributorStats.Commits}"/>
+                <Label Grid.Row="2" Grid.Column="0" Text="Lines of code"/>
+                <Label Grid.Row="3" Grid.Column="0" Text="{Binding ContributorStats.LinesOfCode}"/>
+                <Label Grid.Row="2" Grid.Column="1" Text="Contribution to the project"/>
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding ContributorStats.ContribToProject}"/>
+            </Grid>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>

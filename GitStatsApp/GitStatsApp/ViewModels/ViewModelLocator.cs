@@ -11,6 +11,7 @@ namespace GitStatsApp.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<RepositoryViewModel>();
+            SimpleIoc.Default.Register<ContributorViewModel>();
         }
 
         public MainViewModel Main
@@ -26,6 +27,14 @@ namespace GitStatsApp.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<RepositoryViewModel>();
+            }
+        }
+
+        public ContributorViewModel Contributor
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ContributorViewModel>();
             }
         }
 

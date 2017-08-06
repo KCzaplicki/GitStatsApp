@@ -1,9 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using GitStatsApp.Consts;
 using GitStatsApp.Dtos;
 using GitStatsApp.Enums;
 using GitStatsApp.Services;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -11,7 +13,7 @@ namespace GitStatsApp.ViewModels
 {
     public class RepositoryViewModel : ViewModelBase
     {
-        public string Title { get; } = "GitStatsApp";
+        public string Title { get; } = AppConsts.AppName;
         public string ContributorsHeader { get; } = "Contributors";
         public string ContributorsIcon { get; } = "users.png";
 
@@ -50,7 +52,7 @@ namespace GitStatsApp.ViewModels
 
         private void NavigateToContributorPage(ContributorDto contributor)
         {
-            _navigationService.NavigateTo(Pages.ContributorPage, contributor);
+            _navigationService.NavigateTo(Pages.ContributorPage, new Tuple<RepositoryDto, ContributorDto>(repository, contributor));
         }
     }
 }

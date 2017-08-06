@@ -35,6 +35,13 @@
                 <Setter Property="Font" Value="13"/>
                 <Setter Property="TextColor" Value="#64B5F6"/>
             </Style>
+            <Style x:Key="iconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="24"/>
+                <Setter Property="WidthRequest" Value="24"/>
+            </Style>
+            <Style x:Key="iconLabelStyle" TargetType="Image">
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -50,8 +57,8 @@
                         <Label Text="{Binding Repository.Url}" Style="{StaticResource repositoryUrlLabelStyle}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Style="{StaticResource contributorsHeaderStackLayoutStyle}">
-                        <Image Source="{Binding ContributorsIcon}"/>
-                        <Label Text="{Binding ContributorsHeader}"/>
+                        <Image Source="{Binding ContributorsIcon}" Style="{StaticResource iconStyle}"/>
+                        <Label Text="{Binding ContributorsHeader}" Style="{StaticResource iconLabelStyle}"/>
                     </StackLayout>
                 </StackLayout>
             </ListView.Header>
