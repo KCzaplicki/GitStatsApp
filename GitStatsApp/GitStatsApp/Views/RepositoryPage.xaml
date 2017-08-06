@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GitStatsApp"
+             x:Class="GitStatsApp.Views.RepositoryPage"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+            <Style x:Key="repositoryUrlLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="#969FAA"/>
+                <Setter Property="LineBreakMode" Value="NoWrap"/>
+            </Style>
+            <Style x:Key="repositoryDataStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10, 10, 10, 0"/>
+            </Style>
+            <Style x:Key="contributorsHeaderStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0, 10, 0, 5"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style x:Key="contributorsContentViewStyle" TargetType="ContentView">
+                <Setter Property="HeightRequest" Value="38"></Setter>
+            </Style>
+            <Style x:Key="contributorsStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="12, 10"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style x:Key="contributorsContributorNameLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="Font" Value="13"/>
+            </Style>
+            <Style x:Key="contributorsContributorCommitsLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="Font" Value="13"/>
+                <Setter Property="TextColor" Value="#64B5F6"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Contributors}" HasUnevenRows="True">
+            <ListView.Behaviors>
+                <local:ListViewSelectedItemBehavior Command="{Binding ContributorSelectedCommand}" 
+                    Converter="{StaticResource SelectedItemConverter}" ClearSelectedItemAfterCommand="True"/>
+            </ListView.Behaviors>
+            <ListView.Header>
+                <StackLayout Style="{StaticResource repositoryDataStackLayoutStyle}">
+                    <StackLayout>
+                        <Label Text="{Binding Repository.Name}"/>
+                        <Label Text="{Binding Repository.Url}" Style="{StaticResource repositoryUrlLabelStyle}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Style="{StaticResource contributorsHeaderStackLayoutStyle}">
+                        <Image Source="{Binding ContributorsIcon}"/>
+                        <Label Text="{Binding ContributorsHeader}"/>
+                    </StackLayout>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <ContentView Style="{StaticResource contributorsContentViewStyle}">
+                                <StackLayout Style="{StaticResource contributorsStackLayoutStyle}">
+                                    <Label Text="{Binding Name}" Style="{StaticResource contributorsContributorNameLabelStyle}"/>
+                                    <Label Text="{Binding Commits}" Style="{StaticResource contributorsContributorCommitsLabelStyle}"/>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

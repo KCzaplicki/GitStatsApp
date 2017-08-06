@@ -6,6 +6,7 @@
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
             <Style x:Key="repositoryUrlLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="TextColor" Value="#969FAA"/>
@@ -19,13 +20,17 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <ListView ItemsSource="{Binding Repositories}" HasUnevenRows="True">
+            <ListView.Behaviors>
+                <local:ListViewSelectedItemBehavior Command="{Binding RepositorySelectedCommand}" 
+                    Converter="{StaticResource SelectedItemConverter}" ClearSelectedItemAfterCommand="True"/>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
                             <ContentView Style="{StaticResource repositoriesContentViewStyle}">
                                 <StackLayout>
-                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Name}"/>
                                     <Label Text="{Binding Url}" Style="{StaticResource repositoryUrlLabelStyle}" />
                                 </StackLayout>
                             </ContentView>
