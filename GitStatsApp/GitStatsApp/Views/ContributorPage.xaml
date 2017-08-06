@@ -4,40 +4,78 @@
              xmlns:local="clr-namespace:GitStatsApp"
              x:Class="GitStatsApp.Views.ContributorPage"
              Title="{Binding Title}">
-    <StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DoubleToPercentageValueConverter x:Key="PercentageValueConverter" />
+            <Style x:Key="repositoryUrlLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="#969FAA"/>
+                <Setter Property="LineBreakMode" Value="NoWrap"/>
+            </Style>
+            <Style x:Key="repositoryDataStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10, 10, 10, 0"/>
+            </Style>
+            <Style x:Key="contributorStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10, 10, 0, 5"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style x:Key="dateStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10, 0, 0, 0"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style x:Key="iconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="24"/>
+                <Setter Property="WidthRequest" Value="24"/>
+            </Style>
+            <Style x:Key="iconLabelStyle" TargetType="Image">
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="contributorStatsGridLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+            </Style>
+            <Style x:Key="contributorStatsGridValueLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="0, 5, 0, 5"/>
+                <Setter Property="Font" Value="16"/>
+                <Setter Property="TextColor" Value="#64B5F6"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
         <StackLayout>
-            <StackLayout>
+            <StackLayout Style="{StaticResource repositoryDataStackLayoutStyle}">
                 <Label Text="{Binding Repository.Name}"/>
-                <Label Text="{Binding Repository.Url}" />
+                <Label Text="{Binding Repository.Url}" Style="{StaticResource repositoryUrlLabelStyle}"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" >
-                <Image Source="{Binding ContributorIcon}" WidthRequest="24" HeightRequest="24"/>
-                <Label Text="{Binding Contributor.Name}" VerticalOptions="Center"/>
+            <StackLayout Style="{StaticResource contributorStackLayoutStyle}">
+                <Image Source="{Binding ContributorIcon}" Style="{StaticResource iconStyle}"/>
+                <Label Text="{Binding Contributor.Name}" Style="{StaticResource iconLabelStyle}"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" >
-                <Image Source="{Binding DateIcon}" WidthRequest="24" HeightRequest="24"/>
-                <Label Text="{Binding ContributorStatsDateRange}" VerticalOptions="Center"/>
+            <StackLayout Style="{StaticResource dateStackLayoutStyle}">
+                <Image Source="{Binding DateIcon}" Style="{StaticResource iconStyle}"/>
+                <Label Text="{Binding ContributorStatsDateRange}" Style="{StaticResource iconLabelStyle}"/>
             </StackLayout>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Text="Merges"/>
-                <Label Grid.Row="1" Grid.Column="0" Text="{Binding ContributorStats.Merges}"/>
-                <Label Grid.Row="0" Grid.Column="1" Text="Commits"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ContributorStats.Commits}"/>
-                <Label Grid.Row="2" Grid.Column="0" Text="Lines of code"/>
-                <Label Grid.Row="3" Grid.Column="0" Text="{Binding ContributorStats.LinesOfCode}"/>
-                <Label Grid.Row="2" Grid.Column="1" Text="Contribution to the project"/>
-                <Label Grid.Row="3" Grid.Column="1" Text="{Binding ContributorStats.ContribToProject}"/>
+                <Label Grid.Row="0" Grid.Column="0" Text="{Binding MergersHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding ContributorStats.Merges}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding CommitsHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ContributorStats.Commits}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
+                <Label Grid.Row="2" Grid.Column="0" Text="{Binding LinesOfCodeHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                <Label Grid.Row="3" Grid.Column="0" Text="{Binding ContributorStats.LinesOfCode}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding ContribToProjectHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding ContributorStats.ContribToProject, Converter={StaticResource PercentageValueConverter}}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
             </Grid>
         </StackLayout>
-    </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

@@ -41,6 +41,7 @@
     <Compile Include="Behaviors\ListViewSelectedItemBehavior.cs" />
     <Compile Include="Consts\AppConsts.cs" />
     <Compile Include="Consts\DateTimeConsts.cs" />
+    <Compile Include="Converters\DoubleToPercentageValueConverter.cs" />
     <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Dtos\ContributorStatsDto.cs" />
     <Compile Include="Dtos\ContributorDto.cs" />

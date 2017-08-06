@@ -12,6 +12,10 @@ namespace GitStatsApp.ViewModels
         public string Title { get; } = AppConsts.AppName;
         public string ContributorIcon { get; } = "user.png";
         public string DateIcon { get; } = "date.png";
+        public string MergersHeader { get; } = "Merges";
+        public string CommitsHeader { get; } = "Commits";
+        public string LinesOfCodeHeader { get; } = "Lines of code";
+        public string ContribToProjectHeader { get; } = "Contribution to the project";
 
         public RepositoryDto Repository
         {
