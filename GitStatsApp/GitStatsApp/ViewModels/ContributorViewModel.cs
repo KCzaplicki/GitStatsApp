@@ -1,11 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GitStatsApp.Consts;
 using GitStatsApp.Dtos;
-using GitStatsApp.Enums;
+using GitStatsApp.Helpers;
 using GitStatsApp.Services;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -103,6 +101,8 @@ namespace GitStatsApp.ViewModels
         private ContributorStatsDto contributorStatsIncrement;
         private string contributorStatsDateRange;
         private IContributorService _contributorService;
+        
+        private const string ContributorStatsDateRangeStringFormat = "{0} - {1}";
 
         public ContributorViewModel(IContributorService contributorService)
         {
@@ -110,9 +110,9 @@ namespace GitStatsApp.ViewModels
 
             var contributorStatsDateFrom = (DateTimeConsts.UnixEpoch).ToString(DateTimeConsts.DateTimeFormat);
             var contributorStatsDateTo = (DateTime.Today).ToString(DateTimeConsts.DateTimeFormat);
-            ContributorStatsDateRange = $"{contributorStatsDateFrom} - {contributorStatsDateTo}";
-            ChangeSelectDateRangeCommand = new Command(async () => await ChangeDateRage());
+            ContributorStatsDateRange = string.Format(ContributorStatsDateRangeStringFormat, contributorStatsDateFrom, contributorStatsDateTo);
 
+            ChangeSelectDateRangeCommand = new Command(async () => await ChangeDateRage());
         }
 
         public async Task ChangeDateRage()
@@ -122,63 +122,36 @@ namespace GitStatsApp.ViewModels
                 return;
             }
 
-            var dateRanges = new List<string> {
-                DateRanges.Day,
-                DateRanges.Week,
-                DateRanges.Month,
-                DateRanges.Year,
-                DateRanges.All
-            };
-            var selectedDateRange = await App.Current.MainPage.DisplayActionSheet("Select date range", "Cancel", null, dateRanges.ToArray());
+            const string changeDateRangeHeader = "Select date range";
+            const string changeDateRangeCancel = "Cancel";
 
-            if (!dateRanges.Contains(selectedDateRange))
+            var page = App.Current.MainPage;
+            var selectedDateRange = await page.DisplayActionSheet(changeDateRangeHeader, changeDateRangeCancel, null, DateRangesConsts.DateRanges.ToArray());
+
+            if (!DateRangesConsts.DateRanges.Contains(selectedDateRange))
             {
-                IsLoading = false;
                 return;
             }
 
-            await LoadContributorStats(ContributorStats.Id, selectedDateRange);
+            await LoadContributorStats(Contributor.Id, selectedDateRange);
         }
 
-        public async Task LoadContributorStats(string contributorId, string dateRange = DateRanges.All)
+        public async Task LoadContributorStats(string contributorId, string dateRange = DateRangesConsts.All)
         {
             IsLoading = true;
 
-            ContributorStats = new ContributorStatsDto();
-            ContributorStatsIncrement = new ContributorStatsDto();
-
-            DateTime contributorStatsDateFrom = DateTimeConsts.UnixEpoch;
+            DateTime contributorStatsDateFrom = DateRangeHelper.GetStartRangeDateTime(dateRange);
             var contributorStatsDateToString = (DateTime.Today).ToString(DateTimeConsts.DateTimeFormat);
-
-            switch (dateRange)
-            {
-                case DateRanges.Day:
-                    contributorStatsDateFrom = DateTimeConsts.Yesterday;
-                    break;
-                case DateRanges.Week:
-                    contributorStatsDateFrom = DateTimeConsts.LastWeek;
-                    break;
-                case DateRanges.Month:
-                    contributorStatsDateFrom = DateTimeConsts.LastMonth;
-                    break;
-                case DateRanges.Year:
-                    contributorStatsDateFrom = DateTimeConsts.LastYear;
-                    break;
-                case DateRanges.All:
-                default:
-                    break;
-            }
-
             var contributorStatsDateFromString = (contributorStatsDateFrom).ToString(DateTimeConsts.DateTimeFormat);
-            ContributorStatsDateRange = $"{contributorStatsDateFromString} - {contributorStatsDateToString}";
-            var contributorStats = await _contributorService.GetContributorStats(contributorId, contributorStatsDateFrom, DateTime.UtcNow);
-            ContributorStatsDto contributorStatsIncrement;
+            ContributorStatsDateRange = string.Format(ContributorStatsDateRangeStringFormat, contributorStatsDateFromString, contributorStatsDateToString);
 
-            if (dateRange == DateRanges.All)
+            ContributorStats = await _contributorService.GetContributorStats(contributorId, contributorStatsDateFrom, DateTime.UtcNow);
+
+            if (dateRange == DateRangesConsts.All)
             {
                 var previousContributorStats = await _contributorService.GetContributorStats(contributorId, DateTimeConsts.UnixEpoch, DateTimeConsts.Yesterday);
 
-                contributorStatsIncrement = new ContributorStatsDto
+                ContributorStatsIncrement = new ContributorStatsDto
                 {
                     Commits = contributorStats.Commits - previousContributorStats.Commits,
                     Merges = contributorStats.Merges - previousContributorStats.Merges,
@@ -188,7 +161,7 @@ namespace GitStatsApp.ViewModels
             }
             else
             {
-                contributorStatsIncrement = new ContributorStatsDto
+                ContributorStatsIncrement = new ContributorStatsDto
                 {
                     Commits = int.MinValue,
                     Merges = int.MinValue,
@@ -196,9 +169,6 @@ namespace GitStatsApp.ViewModels
                     ContribToProject = double.MinValue
                 };
             }
-
-            ContributorStats = contributorStats;
-            ContributorStatsIncrement = contributorStatsIncrement;
 
             IsLoading = false;
         }

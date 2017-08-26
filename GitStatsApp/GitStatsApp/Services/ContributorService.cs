@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GitStatsApp.Dtos;
-using GitStatsApp.Enums;
 using System.Net.Http;
 using Newtonsoft.Json;
 using GitStatsApp.Helpers;
+using GitStatsApp.Consts;
 
 namespace GitStatsApp.Services
 {
@@ -27,8 +27,8 @@ namespace GitStatsApp.Services
             }
 
             var response = await _httpClient.GetAsync(from.HasValue ?
-                string.Format(RestApiUrls.GetContributorStatsWithRangeUrl, contributorId, from.Value.ToUnixTimestamp(), toValue.ToUnixTimestamp()) :
-                string.Format(RestApiUrls.GetContributorStatsUrl, contributorId));
+                string.Format(RestApiUrlsConsts.GetContributorStatsWithRangeUrl, contributorId, from.Value.ToUnixTimestamp(), toValue.ToUnixTimestamp()) :
+                string.Format(RestApiUrlsConsts.GetContributorStatsUrl, contributorId));
 
             if (response.IsSuccessStatusCode)
             {

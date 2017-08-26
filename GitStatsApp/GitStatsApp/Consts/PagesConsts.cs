@@ -1,6 +1,6 @@
-﻿namespace GitStatsApp.Enums
+﻿namespace GitStatsApp.Consts
 {
-    public class Pages
+    public class PagesConsts
     {
         public const string MainPage = nameof(MainPage);
         public const string RepositoryPage = nameof(RepositoryPage);

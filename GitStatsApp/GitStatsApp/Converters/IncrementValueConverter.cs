@@ -13,7 +13,7 @@ namespace GitStatsApp
         {
             if (value is double doubleValue)
             {
-                if(doubleValue == double.MinValue)
+                if (doubleValue == double.MinValue)
                 {
                     return string.Empty;
                 }

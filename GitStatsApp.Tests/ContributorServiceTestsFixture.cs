@@ -1,10 +1,10 @@
 ﻿using GitStatsApp.Dtos;
-using GitStatsApp.Enums;
 using Newtonsoft.Json;
 using RichardSzalay.MockHttp;
 using System;
 using GitStatsApp.Helpers;
 using System.Net;
+using GitStatsApp.Consts;
 
 namespace GitStatsApp.Tests
 {
@@ -82,42 +82,42 @@ namespace GitStatsApp.Tests
             LimitedDateContributorTo = new DateTime(2015, 1, 1, 8, 0, 0, DateTimeKind.Utc);
 
             HttpMessageHandler = new MockHttpMessageHandler();
-            HttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsUrl, UnlimitedDateContributorId))
+            HttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsUrl, UnlimitedDateContributorId))
                 .Respond("application/json", JsonConvert.SerializeObject(UnlimitedDateContributor));
-            HttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsWithRangeUrl,
+            HttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsWithRangeUrl,
                 LimitedDateContributorId, 
                 LimitedDateContributorFrom.ToUnixTimestamp(), 
                 LimitedDateContributorTo.ToUnixTimestamp()))
                 .Respond("application/json", JsonConvert.SerializeObject(LimitedDateContributor));
-            HttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsWithRangeUrl,
+            HttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsWithRangeUrl,
                 LimitedDateContributorId,
                 LimitedDateContributorFrom.ToUnixTimestamp(),
                 "*"))
                 .Respond("application/json", JsonConvert.SerializeObject(LimitedDateContributor));
 
             EmptyResultsHttpMessageHandler = new MockHttpMessageHandler();
-            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsUrl, UnlimitedDateContributorId))
+            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsUrl, UnlimitedDateContributorId))
                 .Respond("application/json", "[]");
-            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsWithRangeUrl,
+            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsWithRangeUrl,
                 LimitedDateContributorId,
                 LimitedDateContributorFrom.ToUnixTimestamp(),
                 LimitedDateContributorTo.ToUnixTimestamp()))
                 .Respond("application/json", "[]");
-            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsWithRangeUrl,
+            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsWithRangeUrl,
                 LimitedDateContributorId,
                 LimitedDateContributorFrom.ToUnixTimestamp(),
                 "*"))
                 .Respond("application/json", "[]");
 
             ErrorStatusCodeHttpMessageHandler = new MockHttpMessageHandler();
-            ErrorStatusCodeHttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsUrl, UnlimitedDateContributorId))
+            ErrorStatusCodeHttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsUrl, UnlimitedDateContributorId))
                 .Respond(HttpStatusCode.BadRequest);
-            ErrorStatusCodeHttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsWithRangeUrl,
+            ErrorStatusCodeHttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsWithRangeUrl,
                 LimitedDateContributorId,
                 LimitedDateContributorFrom.ToUnixTimestamp(),
                 LimitedDateContributorTo.ToUnixTimestamp()))
                 .Respond(HttpStatusCode.BadRequest);
-            ErrorStatusCodeHttpMessageHandler.When(string.Format(RestApiUrls.GetContributorStatsWithRangeUrl,
+            ErrorStatusCodeHttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetContributorStatsWithRangeUrl,
                 LimitedDateContributorId,
                 LimitedDateContributorFrom.ToUnixTimestamp(),
                 LimitedDateContributorTo.ToUnixTimestamp()))

@@ -3,9 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using GitStatsApp.Consts;
 using GitStatsApp.Dtos;
-using GitStatsApp.Enums;
 using GitStatsApp.Services;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -40,7 +38,7 @@ namespace GitStatsApp.ViewModels
 
         private void NavigateToRepositoryPage(RepositoryDto repository)
         {
-            _navigationService.NavigateTo(Pages.RepositoryPage, repository);
+            _navigationService.NavigateTo(PagesConsts.RepositoryPage, repository);
         }
     }
 }

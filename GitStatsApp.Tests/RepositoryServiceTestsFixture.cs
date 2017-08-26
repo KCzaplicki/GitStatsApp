@@ -1,5 +1,5 @@
-﻿using GitStatsApp.Dtos;
-using GitStatsApp.Enums;
+﻿using GitStatsApp.Consts;
+using GitStatsApp.Dtos;
 using Newtonsoft.Json;
 using RichardSzalay.MockHttp;
 using System.Collections.Generic;
@@ -91,21 +91,21 @@ namespace GitStatsApp.Tests
             NonExistingRepositoryId = "SWxsdXN0cmF0aW9uLWVuZ2luZQ==";
 
             HttpMessageHandler = new MockHttpMessageHandler();
-            HttpMessageHandler.When(RestApiUrls.GetRepositoriesUrl)
+            HttpMessageHandler.When(RestApiUrlsConsts.GetRepositoriesUrl)
                 .Respond("application/json", JsonConvert.SerializeObject(Repositories));
-            HttpMessageHandler.When(string.Format(RestApiUrls.GetRepositoryContributorsUrl, FirstRepositoryId))
+            HttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetRepositoryContributorsUrl, FirstRepositoryId))
                 .Respond("application/json", JsonConvert.SerializeObject(Contributors));
 
             ErrorStatusCodeHttpMessageHandler = new MockHttpMessageHandler();
-            ErrorStatusCodeHttpMessageHandler.When(RestApiUrls.GetRepositoriesUrl)
+            ErrorStatusCodeHttpMessageHandler.When(RestApiUrlsConsts.GetRepositoriesUrl)
                 .Respond(HttpStatusCode.BadRequest);
-            HttpMessageHandler.When(string.Format(RestApiUrls.GetRepositoryContributorsUrl, FirstRepositoryId))
+            HttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetRepositoryContributorsUrl, FirstRepositoryId))
                 .Respond(HttpStatusCode.BadRequest);
 
             EmptyResultsHttpMessageHandler = new MockHttpMessageHandler();
-            EmptyResultsHttpMessageHandler.When(RestApiUrls.GetRepositoriesUrl)
+            EmptyResultsHttpMessageHandler.When(RestApiUrlsConsts.GetRepositoriesUrl)
                 .Respond("application/json", "{}");
-            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrls.GetRepositoryContributorsUrl, FirstRepositoryId))
+            EmptyResultsHttpMessageHandler.When(string.Format(RestApiUrlsConsts.GetRepositoryContributorsUrl, FirstRepositoryId))
                 .Respond("application/json", "{}");
         }
     }

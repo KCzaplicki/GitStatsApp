@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using GitStatsApp.Dtos;
-using GitStatsApp.Enums;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using GitStatsApp.Consts;
 
 namespace GitStatsApp.Services
 {
@@ -18,7 +18,7 @@ namespace GitStatsApp.Services
 
         public async Task<IList<RepositoryDto>> GetRepositories()
         {
-            var response = await _httpClient.GetAsync(RestApiUrls.GetRepositoriesUrl);
+            var response = await _httpClient.GetAsync(RestApiUrlsConsts.GetRepositoriesUrl);
 
             if (response.IsSuccessStatusCode)
             {
@@ -31,7 +31,7 @@ namespace GitStatsApp.Services
 
         public async Task<IList<ContributorDto>> GetRepositoryContributors(string repositoryId)
         {
-            var response = await _httpClient.GetAsync(string.Format(RestApiUrls.GetRepositoryContributorsUrl, repositoryId));
+            var response = await _httpClient.GetAsync(string.Format(RestApiUrlsConsts.GetRepositoryContributorsUrl, repositoryId));
 
             if (response.IsSuccessStatusCode)
             {

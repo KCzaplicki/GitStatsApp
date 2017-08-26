@@ -1,6 +1,6 @@
-﻿namespace GitStatsApp.Enums
+﻿namespace GitStatsApp.Consts
 {
-    public class RestApiUrls
+    public class RestApiUrlsConsts
     {
         public static readonly string ApiUrl = "http://192.168.1.104:3000/api";
 
