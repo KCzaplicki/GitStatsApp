@@ -7,6 +7,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:DoubleToPercentageValueConverter x:Key="PercentageValueConverter" />
+            <local:IncrementValueConverter x:Key="IncrementValueConverter"/>
+            <local:IncrementStringToColorValueConverter x:Key="IncrementColorValueConverter"/>
+            <local:BoolValueInverseConverter x:Key="BoolInverseConverter"/>
             <Style x:Key="repositoryUrlLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="TextColor" Value="#969FAA"/>
@@ -35,47 +38,80 @@
                 <Setter Property="VerticalOptions" Value="End"/>
             </Style>
             <Style x:Key="contributorStatsGridValueLabelStyle" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="Margin" Value="0, 5, 0, 5"/>
                 <Setter Property="Font" Value="16"/>
                 <Setter Property="TextColor" Value="#64B5F6"/>
             </Style>
+            <Style x:Key="contributorIncrementStatsGridValueLabelStyle" TargetType="Label">
+                <Setter Property="Margin" Value="0, 5, 0, 5"/>
+                <Setter Property="Font" Value="16"/>
+                <Setter Property="TextColor" Value="#4CAF50"/>
+            </Style>
+            <Style x:Key="contributorStatsValueGridValueStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="contributorActivityIndicator" TargetType="ActivityIndicator">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="{Binding HamburgerIcon}" Command="{Binding ChangeSelectDateRangeCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Style="{StaticResource repositoryDataStackLayoutStyle}">
-                <Label Text="{Binding Repository.Name}"/>
-                <Label Text="{Binding Repository.Url}" Style="{StaticResource repositoryUrlLabelStyle}"/>
+            <ActivityIndicator Style="{StaticResource contributorActivityIndicator}" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+            <StackLayout IsVisible="{Binding IsLoading, Converter={StaticResource BoolInverseConverter}}">
+                <StackLayout Style="{StaticResource repositoryDataStackLayoutStyle}">
+                    <Label Text="{Binding Repository.Name}"/>
+                    <Label Text="{Binding Repository.Url}" Style="{StaticResource repositoryUrlLabelStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource contributorStackLayoutStyle}">
+                    <Image Source="{Binding ContributorIcon}" Style="{StaticResource iconStyle}"/>
+                    <Label Text="{Binding Contributor.Name}" Style="{StaticResource iconLabelStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource dateStackLayoutStyle}">
+                    <Image Source="{Binding DateIcon}" Style="{StaticResource iconStyle}"/>
+                    <Label Text="{Binding ContributorStatsDateRange}" Style="{StaticResource iconLabelStyle}"/>
+                </StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding MergersHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                    <StackLayout Grid.Row="1" Grid.Column="0" Style="{StaticResource contributorStatsValueGridValueStackLayoutStyle}">
+                        <Label Text="{Binding ContributorStats.Merges}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
+                        <Label Text="{Binding ContributorStatsIncrement.Merges, Converter={StaticResource IncrementValueConverter}}" Style="{StaticResource contributorIncrementStatsGridValueLabelStyle}"/>
+                    </StackLayout>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding CommitsHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                    <StackLayout Grid.Row="1" Grid.Column="1" Style="{StaticResource contributorStatsValueGridValueStackLayoutStyle}">
+                        <Label Text="{Binding ContributorStats.Commits}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
+                        <Label Text="{Binding ContributorStatsIncrement.Commits, Converter={StaticResource IncrementValueConverter}}" Style="{StaticResource contributorIncrementStatsGridValueLabelStyle}"/>
+                    </StackLayout>
+                    <Label Grid.Row="2" Grid.Column="0" Text="{Binding LinesOfCodeHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                    <StackLayout Grid.Row="3" Grid.Column="0" Style="{StaticResource contributorStatsValueGridValueStackLayoutStyle}">
+                        <Label Text="{Binding ContributorStats.LinesOfCode}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
+                        <Label Text="{Binding ContributorStatsIncrement.LinesOfCode, Converter={StaticResource IncrementValueConverter}}" Style="{StaticResource contributorIncrementStatsGridValueLabelStyle}"/>
+                    </StackLayout>
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding ContribToProjectHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
+                    <StackLayout Grid.Row="3" Grid.Column="1" Style="{StaticResource contributorStatsValueGridValueStackLayoutStyle}">
+                        <Label Text="{Binding ContributorStats.ContribToProject, Converter={StaticResource PercentageValueConverter}}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
+                        <Label Text="{Binding ContributorStatsIncrement.ContribToProject, Converter={StaticResource IncrementValueConverter}}" 
+                           TextColor="{Binding ContributorStatsIncrement.ContribToProject, Converter={StaticResource IncrementColorValueConverter}}"
+                           Style="{StaticResource contributorIncrementStatsGridValueLabelStyle}"/>
+                    </StackLayout>
+                </Grid>
             </StackLayout>
-            <StackLayout Style="{StaticResource contributorStackLayoutStyle}">
-                <Image Source="{Binding ContributorIcon}" Style="{StaticResource iconStyle}"/>
-                <Label Text="{Binding Contributor.Name}" Style="{StaticResource iconLabelStyle}"/>
-            </StackLayout>
-            <StackLayout Style="{StaticResource dateStackLayoutStyle}">
-                <Image Source="{Binding DateIcon}" Style="{StaticResource iconStyle}"/>
-                <Label Text="{Binding ContributorStatsDateRange}" Style="{StaticResource iconLabelStyle}"/>
-            </StackLayout>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="6*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Text="{Binding MergersHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
-                <Label Grid.Row="1" Grid.Column="0" Text="{Binding ContributorStats.Merges}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
-                <Label Grid.Row="0" Grid.Column="1" Text="{Binding CommitsHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ContributorStats.Commits}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
-                <Label Grid.Row="2" Grid.Column="0" Text="{Binding LinesOfCodeHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
-                <Label Grid.Row="3" Grid.Column="0" Text="{Binding ContributorStats.LinesOfCode}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
-                <Label Grid.Row="2" Grid.Column="1" Text="{Binding ContribToProjectHeader}" Style="{StaticResource contributorStatsGridLabelStyle}"/>
-                <Label Grid.Row="3" Grid.Column="1" Text="{Binding ContributorStats.ContribToProject, Converter={StaticResource PercentageValueConverter}}" Style="{StaticResource contributorStatsGridValueLabelStyle}"/>
-            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
