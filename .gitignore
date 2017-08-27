@@ -7,3 +7,9 @@
 
 # ignore express server
 GitStatsApp.RestApi
+
+# ignore packages
+**/packages
+
+# ignore tests results
+**/TestsResults
