@@ -1,12 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
-using GitStatsApp.Consts;
 using GitStatsApp.Services;
 using GitStatsApp.ViewModels;
 using GitStatsApp.Views;
-using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
-using Microsoft.Azure.Mobile.Crashes;
 using System.Net.Http;
 using Xamarin.Forms;
 
@@ -19,8 +15,6 @@ namespace GitStatsApp
 
         public App()
         {
-            MobileCenter.Start($"android={AppConsts.AndroidSecretKey};ios={AppConsts.IosSecrectKey}", typeof(Analytics), typeof(Crashes));
-
             var nav = new NavigationService();
             nav.Configure(typeof(MainPage));
             nav.Configure(typeof(RepositoryPage));
