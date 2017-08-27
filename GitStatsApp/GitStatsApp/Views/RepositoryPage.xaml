@@ -7,6 +7,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+            <local:BoolValueInverseConverter x:Key="BoolInverseConverter"/>
             <Style x:Key="repositoryUrlLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="TextColor" Value="#969FAA"/>
@@ -42,40 +43,48 @@
             <Style x:Key="iconLabelStyle" TargetType="Image">
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
+            <Style x:Key="repositoryActivityIndicator" TargetType="ActivityIndicator">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Contributors}" HasUnevenRows="True">
-            <ListView.Behaviors>
-                <local:ListViewSelectedItemBehavior Command="{Binding ContributorSelectedCommand}" 
+        <StackLayout>
+            <ActivityIndicator Style="{StaticResource repositoryActivityIndicator}" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+            <ListView ItemsSource="{Binding Contributors}" HasUnevenRows="True" IsVisible="{Binding IsLoading, Converter={StaticResource BoolInverseConverter}}">
+                <ListView.Behaviors>
+                    <local:ListViewSelectedItemBehavior Command="{Binding ContributorSelectedCommand}" 
                     Converter="{StaticResource SelectedItemConverter}" ClearSelectedItemAfterCommand="True"/>
-            </ListView.Behaviors>
-            <ListView.Header>
-                <StackLayout Style="{StaticResource repositoryDataStackLayoutStyle}">
-                    <StackLayout>
-                        <Label Text="{Binding Repository.Name}"/>
-                        <Label Text="{Binding Repository.Url}" Style="{StaticResource repositoryUrlLabelStyle}"/>
+                </ListView.Behaviors>
+                <ListView.Header>
+                    <StackLayout Style="{StaticResource repositoryDataStackLayoutStyle}">
+                        <StackLayout>
+                            <Label Text="{Binding Repository.Name}"/>
+                            <Label Text="{Binding Repository.Url}" Style="{StaticResource repositoryUrlLabelStyle}"/>
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource contributorsHeaderStackLayoutStyle}">
+                            <Image Source="{Binding ContributorsIcon}" Style="{StaticResource iconStyle}"/>
+                            <Label Text="{Binding ContributorsHeader}" Style="{StaticResource iconLabelStyle}"/>
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout Style="{StaticResource contributorsHeaderStackLayoutStyle}">
-                        <Image Source="{Binding ContributorsIcon}" Style="{StaticResource iconStyle}"/>
-                        <Label Text="{Binding ContributorsHeader}" Style="{StaticResource iconLabelStyle}"/>
-                    </StackLayout>
-                </StackLayout>
-            </ListView.Header>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <ContentView Style="{StaticResource contributorsContentViewStyle}">
-                                <StackLayout Style="{StaticResource contributorsStackLayoutStyle}">
-                                    <Label Text="{Binding Name}" Style="{StaticResource contributorsContributorNameLabelStyle}"/>
-                                    <Label Text="{Binding Commits}" Style="{StaticResource contributorsContributorCommitsLabelStyle}"/>
-                                </StackLayout>
-                            </ContentView>
-                        </ViewCell.View>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <ContentView Style="{StaticResource contributorsContentViewStyle}">
+                                    <StackLayout Style="{StaticResource contributorsStackLayoutStyle}">
+                                        <Label Text="{Binding Name}" Style="{StaticResource contributorsContributorNameLabelStyle}"/>
+                                        <Label Text="{Binding Commits}" Style="{StaticResource contributorsContributorCommitsLabelStyle}"/>
+                                    </StackLayout>
+                                </ContentView>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

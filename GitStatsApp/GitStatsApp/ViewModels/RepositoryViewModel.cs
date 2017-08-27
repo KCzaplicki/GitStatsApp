@@ -17,6 +17,18 @@ namespace GitStatsApp.ViewModels
         public string ContributorsIcon { get; } = "users.png";
 
         public ObservableCollection<ContributorDto> Contributors { get; set; }
+        public bool IsLoading
+        {
+            get
+            {
+                return isLoading;
+            }
+            set
+            {
+                isLoading = value;
+                RaisePropertyChanged(() => IsLoading);
+            }
+        }
         public RepositoryDto Repository
         {
             get
@@ -34,6 +46,7 @@ namespace GitStatsApp.ViewModels
         private RepositoryDto repository;
         private IRepositoryService _repositoryService;
         private INavigationService _navigationService;
+        private bool isLoading;
 
         public RepositoryViewModel(IRepositoryService repositoryService, INavigationService navigationService)
         {
@@ -44,10 +57,14 @@ namespace GitStatsApp.ViewModels
 
         public async Task LoadRepositoryContributors(string repositoryId)
         {
+            IsLoading = true;
+
             var serviceContributors = await _repositoryService.GetRepositoryContributors(repositoryId);
             Contributors = new ObservableCollection<ContributorDto>(serviceContributors);
 
             RaisePropertyChanged(() => Contributors);
+
+            IsLoading = false;
         }
 
         private void NavigateToContributorPage(ContributorDto contributor)
