@@ -19,7 +19,7 @@ namespace GitStatsApp.Services
 
         public async Task<ContributorStatsDto> GetContributorStats(string contributorId, DateTime? from = null, DateTime? to = null)
         {
-            DateTime toValue = DateTime.Now;
+            DateTime toValue = DateTimeConsts.Today;
 
             if (from.HasValue && to.HasValue)
             {

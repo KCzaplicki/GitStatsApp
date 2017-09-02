@@ -109,7 +109,7 @@ namespace GitStatsApp.ViewModels
             _contributorService = contributorService;
 
             var contributorStatsDateFrom = (DateTimeConsts.UnixEpoch).ToString(DateTimeConsts.DateTimeFormat);
-            var contributorStatsDateTo = (DateTime.Today).ToString(DateTimeConsts.DateTimeFormat);
+            var contributorStatsDateTo = (DateTimeConsts.Today).ToString(DateTimeConsts.DateTimeFormat);
             ContributorStatsDateRange = string.Format(ContributorStatsDateRangeStringFormat, contributorStatsDateFrom, contributorStatsDateTo);
 
             ChangeSelectDateRangeCommand = new Command(async () => await ChangeDateRage());
@@ -139,13 +139,14 @@ namespace GitStatsApp.ViewModels
         public async Task LoadContributorStats(string contributorId, string dateRange = DateRangesConsts.All)
         {
             IsLoading = true;
-
+            
+            DateTime contributorStatsDateTo = DateTimeConsts.Today;
             DateTime contributorStatsDateFrom = DateRangeHelper.GetStartRangeDateTime(dateRange);
-            var contributorStatsDateToString = (DateTime.Today).ToString(DateTimeConsts.DateTimeFormat);
+            var contributorStatsDateToString = (contributorStatsDateTo).ToString(DateTimeConsts.DateTimeFormat);
             var contributorStatsDateFromString = (contributorStatsDateFrom).ToString(DateTimeConsts.DateTimeFormat);
             ContributorStatsDateRange = string.Format(ContributorStatsDateRangeStringFormat, contributorStatsDateFromString, contributorStatsDateToString);
 
-            ContributorStats = await _contributorService.GetContributorStats(contributorId, contributorStatsDateFrom, DateTime.UtcNow);
+            ContributorStats = await _contributorService.GetContributorStats(contributorId, contributorStatsDateFrom, contributorStatsDateTo);
 
             if (dateRange == DateRangesConsts.All)
             {

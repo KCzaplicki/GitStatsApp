@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GitStatsApp.Consts;
+using System;
 
 namespace GitStatsApp.Helpers
 {
     public static class DateTimeExtension
     {
-        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime UnixEpoch = DateTimeConsts.UnixEpoch;
 
         public static long ToUnixTimestamp(this DateTime date)
         {
