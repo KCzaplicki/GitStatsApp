@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitStatsApp.Android", "GitStatsApp\GitStatsApp.Android\GitStatsApp.Android.csproj", "{2AD7F484-B1A3-4110-B072-9FF07FD287C9}"
 EndProject
@@ -134,5 +134,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {663CEB4C-39C9-4BC1-9309-3051DBF80B3D}
 	EndGlobalSection
 EndGlobal
